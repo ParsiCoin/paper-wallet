@@ -9082,11 +9082,11 @@ return{_strlen:lb,_ge_mul8:Va,_keccak:db,_ge_scalarmult:Ta,_ge_fromfe_frombytes_
 
 
 var ParsConfig = {
-    coinUnitPlaces: 8,
+    coinUnitPlaces: 12,
     coinSymbol: 'PARS',
-    coinName: 'Parsicoin',
-    coinUriPrefix: 'Parsicoin:',
-    addressPrefix: 0xf5
+    coinName: 'ParsiCoin',
+    coinUriPrefix: 'parsicoin:',
+    addressPrefix: 0x90004
 };
 var cnUtilGen = function(initConfig) {
     //var config = $.extend({}, initConfig);
@@ -10526,7 +10526,7 @@ html { font-family: sans-serif }
 	
 	
     <div class="row ">
-        <div class="col-md-6">
+        <div class="col-md-12">
 			<div class="panel panel-primary">
 			  <div class="panel-heading">
 				<h3 class="panel-title">Random generator</h3>
@@ -10546,23 +10546,6 @@ html { font-family: sans-serif }
 			</div>
 			
                 
-        </div>
-        <div class="col-md-6">
-			<div class="panel panel-primary">
-			  <div class="panel-heading">
-				<h3 class="panel-title">Vanity generator</h3>
-			  </div>
-			  <div class="panel-body">
-				<form>
-					<div class="form-group">
-					  <label class="control-label" for="user_entropy_widget">Prefix (very slow for more than a few characters)</label>
-					  <input type="text" value="h" class="form-control" id="prefix_widget" oninput="js:check_prefix_validity()"; />
-					</div>
-				
-					<input class="btn btn-warning btn-lg " type="button" onclick="js:genwallet_prefix();" value="Generate wallet with prefix" action="" id="gen_prefix_widget"/>
-				</form>
-			  </div>
-			</div>
         </div>
     </div>
 	
@@ -10873,7 +10856,7 @@ var ffhex="ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff";
 
 function is_valid_prefix(prefix)
 {
-  if (prefix.length <= 0 || prefix.length >= 95)
+  if (prefix.length <= 0 || prefix.length >= 98)
     return false;
   var lowest_address=cnUtil.pubkeys_to_string(zerohex,zerohex);
   var highest_address=cnUtil.pubkeys_to_string(ffhex,ffhex);
@@ -10917,8 +10900,8 @@ function genwallet_prefix()
     prefix_widget = document.getElementById("prefix_widget");
     prefix = prefix_widget.value;
     prefix.trim();
-    if (prefix.length < 2 || prefix[0] != "K") {
-      alert("Bad prefix "+prefix+" should start with K and be at least one extra character");
+    if (prefix.length < 5 || prefix[0] != "PARS") {
+      alert("Bad prefix "+prefix+" should start with PARS and be at least one extra character");
       return;
     }
     if (!is_valid_prefix(prefix)) {
